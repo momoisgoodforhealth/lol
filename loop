@@ -1,0 +1,35 @@
+public class MainActivity extends AppCompatActivity {
+
+    ListView listView;
+    String[] values = {"Apple", "Orange", "Banana"};
+    List<String> arrayList;
+    Button button;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        listView = (ListView)findViewById(R.id.listView);
+        button = (Button)findViewById(R.id.button);
+        arrayList = new ArrayList<String>();
+
+        Collections.addAll(arrayList,values); // here you're copying all items from String[] to ArrayList
+
+        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,arrayList);
+        listView.setAdapter(arrayAdapter);
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                arrayList.remove(arrayList.get(2)); // here i remove banana since it's position is two. My ordering of items is different so it removed banana. If i use ordering from your quest, it will remove orange.
+                arrayList.add("lemon"); // adding lemon to list
+                arrayList.add("Pomgranete"); // adding pomgranete
+                arrayAdapter.notifyDataSetChanged(); // this used to refresh the listView
+            }
+        });
+
+     }
+    }
+   
